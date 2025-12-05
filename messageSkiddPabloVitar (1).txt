@@ -1,0 +1,889 @@
+-- ts file was generated at discord.gg/25ms
+
+
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
+v1:MakeNotification({
+    Name = "Script Loaded!",
+    Content = "I already called FBI and sent your IP address to Roblox",
+    Image = "rbxassetid://4483345998",
+    Time = 5
+})
+local v2 = v1:MakeWindow({
+    Name = "Nokt/Flee The Facility",
+    HidePremium = false,
+    SaveConfig = true,
+    IntroText = "Nokt",
+    ConfigFolder = "Orion"
+})
+local v3 = v2:MakeTab({
+    Name = "Main",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+local v4 = v2:MakeTab({
+    Name = "Visuals",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+local v5 = v2:MakeTab({
+    Name = "Misc",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+local v6 = v2:MakeTab({
+    Name = "Credits",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+v3:AddParagraph("!!!!!!!!", "After script running, jump once.\nAfter use NoClip, jump once if you dont want your character walk like disabled person.")
+local v7 = game:GetService("RunService")
+local vu8 = game:GetService("ReplicatedStorage")
+local vu9 = false
+local function vu10()
+    if vu9 then
+        vu8.RemoteEvent:FireServer("SetPlayerMinigameResult", true)
+    end
+end
+v7.Heartbeat:Connect(function()
+    vu10()
+end)
+v3:AddToggle({
+    Name = "Never Fail Hacking",
+    Default = false,
+    Callback = function(p11)
+        vu9 = p11
+    end
+})
+local v12 = game.Players.LocalPlayer
+local vu13 = (v12.Character or v12.CharacterAdded:Wait()):WaitForChild("Humanoid")
+local vu14 = false
+v3:AddToggle({
+    Name = "No Slow When Beast",
+    Default = false,
+    Callback = function(p15)
+        vu14 = p15
+        if vu14 then
+            game:GetService("RunService").Stepped:Connect(function()
+                if vu13.WalkSpeed < 16 then
+                    vu13.WalkSpeed = 16
+                end
+            end)
+        end
+    end
+})
+local vu16 = game:GetService("Players")
+local v17 = game:GetService("RunService")
+local vu18 = vu16.LocalPlayer
+local vu19 = game.Workspace.CurrentCamera
+local vu20 = {}
+local vu21 = {}
+local vu22 = false
+local vu23 = "Box"
+local vu24 = Color3.fromRGB(255, 0, 0)
+local vu25 = Color3.fromRGB(0, 255, 0)
+local vu26 = Color3.fromRGB(255, 0, 0)
+local vu27 = Vector3.new(0, 1.4, 0)
+local vu28 = Vector3.new(0, 3.4, 0)
+local function vu42(p29)
+    if not vu20[p29] then
+        vu20[p29] = Drawing.new("Quad")
+        vu20[p29].Thickness = 2
+        vu20[p29].Transparency = 0.5
+    end
+    local v30 = vu20[p29]
+    if p29.Character and p29.Character:FindFirstChild("HumanoidRootPart") then
+        local v31 = p29.Character:FindFirstChild("Head")
+        local v32 = p29.Character:FindFirstChild("HumanoidRootPart")
+        if v31 and v32 then
+            local v33 = v31.Position + vu27
+            local v34 = v32.Position - vu28
+            local v35 = (v33 - vu19.CFrame.Position).Magnitude
+            local v36, v37 = vu19:WorldToViewportPoint(v33)
+            local v38 = vu19:WorldToViewportPoint(v34)
+            if v37 and v36.Z > 0 then
+                local v39 = 25 / (v35 * 0.02)
+                local _ = (v33.Y - v34.Y) / (v35 * 0.02)
+                local v40 = p29.Team == vu18.Team and vu25 or vu24
+                if p29.Character:FindFirstChild("Hammer") then
+                    v40 = vu26
+                end
+                v30.Color = v40
+                v30.PointA = Vector2.new(v36.X - v39, v38.Y)
+                v30.PointB = Vector2.new(v36.X + v39, v38.Y)
+                v30.PointC = Vector2.new(v36.X + v39, v36.Y)
+                v30.PointD = Vector2.new(v36.X - v39, v36.Y)
+                local v41 = vu22
+                if v41 then
+                    v41 = vu23 == "Box"
+                end
+                v30.Visible = v41
+            else
+                v30.Visible = false
+            end
+        else
+            v30.Visible = false
+        end
+    else
+        v30.Visible = false
+    end
+end
+local function vu49(pu43)
+    if not vu21[pu43] then
+        vu21[pu43] = Instance.new("Highlight")
+        vu21[pu43].OutlineColor = Color3.fromRGB(255, 255, 255)
+        vu21[pu43].OutlineTransparency = 0.5
+        vu21[pu43].FillTransparency = 0.5
+        vu21[pu43].Parent = pu43.Character or pu43.CharacterAdded:Wait()
+    end
+    local vu44 = vu21[pu43]
+    local function vu48()
+        if pu43.Character then
+            local v45 = pu43.Team == vu18.Team and vu25 or vu24
+            if pu43.Character:FindFirstChild("Hammer") then
+                v45 = vu26
+            end
+            vu44.FillColor = v45
+            vu44.Adornee = pu43.Character
+            local v46 = vu44
+            local v47 = vu22
+            if v47 then
+                v47 = vu23 == "Highlight"
+            end
+            v46.Enabled = v47
+        else
+            vu44.Enabled = false
+        end
+    end
+    pu43.CharacterAdded:Connect(function()
+        vu44.Parent = pu43.Character
+        vu48()
+    end)
+    vu48()
+end
+local function vu55()
+    local v50 = vu16
+    local v51, v52, v53 = pairs(v50:GetPlayers())
+    while true do
+        local v54
+        v53, v54 = v51(v52, v53)
+        if v53 == nil then
+            break
+        end
+        if v54 ~= vu18 then
+            if vu23 ~= "Box" then
+                if vu23 == "Highlight" then
+                    vu49(v54)
+                    if vu20[v54] then
+                        vu20[v54].Visible = false
+                        vu20[v54] = nil
+                    end
+                end
+            else
+                vu42(v54)
+                if vu21[v54] then
+                    vu21[v54]:Destroy()
+                    vu21[v54] = nil
+                end
+            end
+        end
+    end
+end
+v17.RenderStepped:Connect(function()
+    vu55()
+end)
+vu16.PlayerAdded:Connect(function(p56)
+    if vu23 ~= "Box" then
+        if vu23 == "Highlight" then
+            vu49(p56)
+        end
+    else
+        vu42(p56)
+    end
+end)
+vu16.PlayerRemoving:Connect(function(p57)
+    if vu20[p57] then
+        vu20[p57].Visible = false
+        vu20[p57] = nil
+    end
+    if vu21[p57] then
+        vu21[p57]:Destroy()
+        vu21[p57] = nil
+    end
+end)
+v4:AddToggle({
+    Name = "ESP",
+    Default = false,
+    Callback = function(p58)
+        vu22 = p58
+        vu55()
+    end
+})
+v4:AddDropdown({
+    Name = "Choose Style",
+    Default = "Box",
+    Options = {
+        "Box",
+        "Highlight"
+    },
+    Callback = function(p59)
+        vu23 = p59
+        vu55()
+    end
+})
+local v60 = game:GetService("CoreGui")
+local vu61 = game:GetService("Workspace")
+local vu62 = "AlwaysOnTop"
+local vu63 = 0.5
+local vu64 = Color3.fromRGB(255, 255, 255)
+local vu65 = 0.5
+local vu66 = Instance.new("Folder")
+vu66.Parent = v60
+vu66.Name = "Highlight_Storage"
+local vu67 = {}
+local function vu69(p68)
+    if p68.BrickColor ~= BrickColor.new("Bright blue") then
+        if p68.BrickColor ~= BrickColor.new("Dark green") then
+            if p68.BrickColor ~= BrickColor.new("Bright red") then
+                return Color3.fromRGB(0, 255, 0)
+            else
+                return Color3.fromRGB(255, 0, 0)
+            end
+        else
+            return Color3.fromRGB(27, 191, 8)
+        end
+    else
+        return Color3.fromRGB(0, 170, 255)
+    end
+end
+local function vu73(p70, p71)
+    local v72 = p70:FindFirstChild("Screen", true)
+    if v72 and v72:IsA("BasePart") then
+        p71.FillColor = vu69(v72)
+    else
+        p71.FillColor = Color3.fromRGB(0, 255, 0)
+    end
+end
+local function vu77(pu74)
+    local vu75 = Instance.new("Highlight")
+    vu75.Name = pu74.Name
+    vu75.DepthMode = vu62
+    vu75.FillTransparency = vu63
+    vu75.OutlineColor = vu64
+    vu75.OutlineTransparency = vu65
+    vu75.Adornee = pu74
+    vu75.Parent = vu66
+    vu73(pu74, vu75)
+    local v76 = pu74:FindFirstChild("Screen", true)
+    if v76 and v76:IsA("BasePart") then
+        vu67[pu74] = v76:GetPropertyChangedSignal("BrickColor"):Connect(function()
+            vu73(pu74, vu75)
+        end)
+    end
+end
+local function vu83(p78)
+    local v79, v80, v81 = pairs(p78:GetDescendants())
+    while true do
+        local v82
+        v81, v82 = v79(v80, v81)
+        if v81 == nil then
+            break
+        end
+        if v82:IsA("Model") and v82.Name == "ComputerTable" then
+            vu77(v82)
+        end
+    end
+end
+local function vu89()
+    local v84 = vu66
+    local v85, v86, v87 = pairs(v84:GetChildren())
+    if v88:IsA("Highlight") then
+        vu73(v88.Adornee, v88)
+    end
+    local v88
+    v87, v88 = v85(v86, v87)
+    if v87 ~= nil then
+    end
+    wait(0.7)
+	
+end
+local vu90 = false
+local function v104(p91)
+    vu90 = p91
+    if p91 then
+        vu83(vu61)
+        vu61.DescendantAdded:Connect(function(p92)
+            if vu90 and (p92:IsA("Model") and p92.Name == "ComputerTable") then
+                vu77(p92)
+            end
+        end)
+        vu61.DescendantRemoving:Connect(function(p93)
+            if p93:IsA("Model") and p93.Name == "ComputerTable" then
+                local v94 = vu66:FindFirstChild(p93.Name)
+                if v94 then
+                    v94:Destroy()
+                end
+                if vu67[p93] then
+                    vu67[p93]:Disconnect()
+                    vu67[p93] = nil
+                end
+            end
+        end)
+        spawn(vu89)
+    else
+        local v95 = vu66
+        local v96, v97, v98 = pairs(v95:GetChildren())
+        while true do
+            local v99
+            v98, v99 = v96(v97, v98)
+            if v98 == nil then
+                break
+            end
+            v99:Destroy()
+        end
+        local v100, v101, v102 = pairs(vu67)
+        while true do
+            local v103
+            v102, v103 = v100(v101, v102)
+            if v102 == nil then
+                break
+            end
+            v103:Disconnect()
+        end
+        vu67 = {}
+    end
+end
+if v4 then
+    v4:AddToggle({
+        Name = "Computer ESP",
+        Default = false,
+        Save = true,
+        Flag = "toggle",
+        Callback = v104
+    })
+end
+local vu105 = game:GetService("Workspace")
+local v106 = game:GetService("CoreGui")
+local vu107 = "AlwaysOnTop"
+local vu108 = 0.5
+local vu109 = Color3.fromRGB(255, 255, 255)
+local vu110 = 0.5
+local vu111 = Color3.fromRGB(255, 255, 255)
+local vu112 = Instance.new("Folder")
+vu112.Parent = v106
+vu112.Name = "Door_Highlight_Storage"
+local vu113 = {}
+local function vu116(p114)
+    local v115 = Instance.new("Highlight")
+    v115.Name = p114.Name
+    v115.DepthMode = vu107
+    v115.FillTransparency = vu108
+    v115.OutlineColor = vu109
+    v115.OutlineTransparency = vu110
+    v115.FillColor = vu111
+    v115.Adornee = p114
+    v115.Parent = vu112
+end
+local function vu122(p117)
+    local v118, v119, v120 = pairs(p117:GetDescendants())
+    while true do
+        local v121
+        v120, v121 = v118(v119, v120)
+        if v120 == nil then
+            break
+        end
+        if v121:IsA("Model") and v121.Name == "Door" then
+            vu116(v121)
+        end
+    end
+end
+local vu123 = false
+local function v137(p124)
+    vu123 = p124
+    if p124 then
+        vu122(vu105)
+        vu113.descendantAdded = vu105.DescendantAdded:Connect(function(p125)
+            if vu123 and (p125:IsA("Model") and p125.Name == "Door") then
+                vu116(p125)
+            end
+        end)
+        vu113.descendantRemoving = vu105.DescendantRemoving:Connect(function(p126)
+            local v127 = p126:IsA("Model") and p126.Name == "Door" and vu112:FindFirstChild(p126.Name)
+            if v127 then
+                v127:Destroy()
+            end
+        end)
+    else
+        local v128 = vu112
+        local v129, v130, v131 = pairs(v128:GetChildren())
+        while true do
+            local v132
+            v131, v132 = v129(v130, v131)
+            if v131 == nil then
+                break
+            end
+            v132:Destroy()
+        end
+        local v133, v134, v135 = pairs(vu113)
+        while true do
+            local v136
+            v135, v136 = v133(v134, v135)
+            if v135 == nil then
+                break
+            end
+            v136:Disconnect()
+        end
+        vu113 = {}
+    end
+end
+if v4 then
+    v4:AddToggle({
+        Name = "Doors",
+        Default = false,
+        Save = true,
+        Flag = "toggle",
+        Callback = v137
+    })
+end
+local v138 = game:GetService("Players")
+local vu139 = game:GetService("RunService")
+local v140 = v138.LocalPlayer
+local vu141 = v140.Character or v140.CharacterAdded:Wait()
+local vu142 = false
+local function vu148()
+    local v143 = vu141
+    local v144, v145, v146 = pairs(v143:GetChildren())
+    while true do
+        local vu147
+        v146, vu147 = v144(v145, v146)
+        if v146 == nil then
+            break
+        end
+        pcall(function()
+            if vu147:IsA("BasePart") then
+                vu147.CanCollide = false
+            elseif vu147:IsA("Model") and vu147:FindFirstChild("Head") then
+                vu147.Head.CanCollide = false
+            end
+        end)
+    end
+end
+local function vu154()
+    local v149 = vu141
+    local v150, v151, v152 = pairs(v149:GetChildren())
+    while true do
+        local vu153
+        v152, vu153 = v150(v151, v152)
+        if v152 == nil then
+            break
+        end
+        pcall(function()
+            if vu153:IsA("BasePart") then
+                vu153.CanCollide = true
+            elseif vu153:IsA("Model") and vu153:FindFirstChild("Head") then
+                vu153.Head.CanCollide = true
+            end
+        end)
+    end
+end
+vu139.Heartbeat:Connect(function()
+    if vu142 then
+        vu148()
+    end
+end)
+v5:AddToggle({
+    Name = "No-clip",
+    Default = false,
+    Callback = function(p155)
+        vu142 = p155
+        if not p155 then
+            vu154()
+        end
+    end
+})
+v140.CharacterAdded:Connect(function(p156)
+    vu141 = p156
+    if vu142 then
+        vu139.Heartbeat:Wait()
+        vu148()
+    end
+end)
+local vu157 = false
+local vu158 = nil
+v5:AddToggle({
+    Name = "Inf Jump",
+    Default = false,
+    Save = true,
+    Flag = "toggle",
+    Callback = function(p159)
+        vu157 = p159
+        if vu157 then
+            if not vu158 then
+                vu158 = game:GetService("UserInputService").JumpRequest:Connect(function()
+                    game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+                end)
+            end
+        elseif vu158 then
+            vu158:Disconnect()
+            vu158 = nil
+        end
+    end
+})
+local vu160 = game.Players.LocalPlayer
+local v161 = vu160
+local v162 = vu160.GetMouse(v161)
+local vu163 = vu160.Character.HumanoidRootPart
+local vu164 = false
+local vu165 = {
+    f = 0,
+    b = 0,
+    l = 0,
+    r = 0
+}
+local vu166 = 70
+local v167 = Enum.KeyCode.Z
+function Fly()
+    vu164 = true
+    local v168 = Instance.new("BodyGyro", vu163)
+    v168.P = 90000
+    v168.maxTorque = Vector3.new(9000000000, 9000000000, 9000000000)
+    v168.cframe = vu163.CFrame
+    local v169 = Instance.new("BodyVelocity", vu163)
+    v169.velocity = Vector3.new(0, 0.1, 0)
+    v169.maxForce = Vector3.new(9000000000, 9000000000, 9000000000)
+    while vu164 do
+        vu160.Character.Humanoid.PlatformStand = true
+        if vu165.l + vu165.r ~= 0 or vu165.f + vu165.b ~= 0 then
+            v169.velocity = (game.Workspace.CurrentCamera.CFrame.lookVector * (vu165.f + vu165.b) + (game.Workspace.CurrentCamera.CFrame * CFrame.new(vu165.l + vu165.r, (vu165.f + vu165.b) * 0.2, 0).p - game.Workspace.CurrentCamera.CFrame.p)) * vu166
+        else
+            v169.velocity = Vector3.new(0, 0.1, 0)
+        end
+        v168.cframe = game.Workspace.CurrentCamera.CFrame * CFrame.Angles(- math.rad((vu165.f + vu165.b) * 50), 0, 0)
+        wait()
+    end
+    vu165 = {
+        f = 0,
+        b = 0,
+        l = 0,
+        r = 0
+    }
+    v169:Destroy()
+    v168:Destroy()
+    vu160.Character.Humanoid.PlatformStand = false
+end
+v162.KeyDown:connect(function(p170)
+    if p170:lower() ~= "w" then
+        if p170:lower() ~= "s" then
+            if p170:lower() ~= "a" then
+                if p170:lower() == "d" then
+                    vu165.r = 1
+                end
+            else
+                vu165.l = - 1
+            end
+        else
+            vu165.b = - 1
+        end
+    else
+        vu165.f = 1
+    end
+end)
+v162.KeyUp:connect(function(p171)
+    if p171:lower() ~= "w" then
+        if p171:lower() ~= "s" then
+            if p171:lower() ~= "a" then
+                if p171:lower() == "d" then
+                    vu165.r = 0
+                end
+            else
+                vu165.l = 0
+            end
+        else
+            vu165.b = 0
+        end
+    else
+        vu165.f = 0
+    end
+end)
+v5:AddBind({
+    Name = "Fly",
+    Default = v167,
+    Hold = false,
+    Callback = function()
+        if vu164 then
+            vu164 = false
+        else
+            Fly()
+        end
+    end
+})
+game:GetService("Players")
+game:GetService("Workspace")
+local _ = game.Workspace.CurrentCamera
+local vu172 = "HumanoidRootPart"
+local vu173 = Color3.new(1, 0, 0)
+local vu174 = Color3.new(1, 1, 1)
+local vu175 = 1
+local vu176 = true
+local function vu178(p177)
+    return Vector2.new(p177.ViewportSize.X / 2, p177.ViewportSize.Y * 0.9)
+end
+local function vu184(p179)
+    if p179.Character then
+        local v180, v181, v182 = ipairs(p179.Character:GetChildren())
+        while true do
+            local v183
+            v182, v183 = v180(v181, v182)
+            if v182 == nil then
+                break
+            end
+            if v183.Name == "Hammer" then
+                return true
+            end
+        end
+    end
+    return false
+end
+local vu185 = workspace.CurrentCamera
+local vu186 = vu178(vu185)
+local v187 = vu185
+vu185.GetPropertyChangedSignal(v187, "ViewportSize"):Connect(function()
+    vu186 = vu178(vu185)
+end)
+local vu188 = Instance.new("ScreenGui")
+vu188.Name = "SnaplineGui"
+vu188.Parent = game.Players.LocalPlayer.PlayerGui
+local vu189 = {}
+function Setline(p190, p191, p192, p193, p194)
+    local v195 = (p193 + p194) / 2
+    p190.Position = UDim2.new(0, v195.X, 0, v195.Y)
+    local v196 = (p193 - p194).Magnitude
+    p190.BackgroundColor3 = p192
+    p190.BorderColor3 = p192
+    p190.Size = UDim2.new(0, v196, 0, p191)
+    p190.Rotation = math.deg(math.atan2(p194.Y - p193.Y, p194.X - p193.X))
+end
+local function vu213()
+    local v197, v198, v199 = pairs(game.Players:GetPlayers())
+    local v200 = {}
+    while true do
+        local v201
+        v199, v201 = v197(v198, v199)
+        if v199 == nil then
+            break
+        end
+        if v201 ~= game.Players.LocalPlayer and (vu176 or (game.Players.LocalPlayer.Team == nil or v201.Team ~= game.Players.LocalPlayer.Team)) then
+            local v202 = v201.Character
+            if v202 then
+                local v203 = v202:FindFirstChild(vu172)
+                if v203 then
+                    local v204, v205 = vu185:WorldToScreenPoint(v203.Position)
+                    if v205 then
+                        local v206 = vu184(v201) and vu173 or vu174
+                        table.insert(v200, {
+                            Vector2.new(v204.X, v204.Y),
+                            v206
+                        })
+                    end
+                end
+            end
+        end
+    end
+    if # v200 > # vu189 then
+        local v207 = Instance.new("Frame")
+        v207.Name = "Snapline"
+        v207.AnchorPoint = Vector2.new(0.5, 0.5)
+        v207.Parent = vu188
+        table.insert(vu189, v207)
+    end
+    local v208, v209, v210 = pairs(vu189)
+    while true do
+        local v211
+        v210, v211 = v208(v209, v210)
+        if v210 == nil then
+            break
+        end
+        local v212 = v200[v210]
+        if v212 then
+            Setline(v211, vu175, v212[2], vu186, v212[1])
+        else
+            v211:Destroy()
+            table.remove(vu189, v210)
+        end
+    end
+end
+local vu214 = false
+v4:AddToggle({
+    Name = "Tracers",
+    Default = false,
+    Callback = function(p215)
+        vu214 = p215
+        if vu214 then
+            vu213()
+        else
+            local v216, v217, v218 = pairs(vu189)
+            while true do
+                local v219
+                v218, v219 = v216(v217, v218)
+                if v218 == nil then
+                    break
+                end
+                v219:Destroy()
+            end
+            vu189 = {}
+        end
+    end
+})
+game:GetService("RunService").RenderStepped:Connect(function()
+    if vu214 then
+        vu213()
+    end
+end)
+local vu220 = game:GetService("Lighting")
+local vu221 = 0.25
+local function vu223()
+    local v222 = vu220:FindFirstChildOfClass("Atmosphere")
+    if v222 then
+        v222.Density = 0
+    end
+end
+local function vu225()
+    local v224 = vu220:FindFirstChildOfClass("Atmosphere")
+    if v224 then
+        v224.Density = vu221
+    end
+end
+v3:AddToggle({
+    Name = "Remove Darkness",
+    Default = false,
+    Callback = function(p226)
+        if p226 then
+            vu223()
+        else
+            vu225()
+        end
+    end
+})
+local vu227 = game:GetService("Players")
+local vu228 = game:GetService("Workspace")
+local function vu241()
+    local v229 = vu227.LocalPlayer.Character
+    if v229 and v229:FindFirstChild("HumanoidRootPart") then
+        local v230 = vu228
+        local v231, v232, v233 = ipairs(v230:GetDescendants())
+        local v234 = {}
+        while true do
+            local v235
+            v233, v235 = v231(v232, v233)
+            if v233 == nil then
+                break
+            end
+            if v235:IsA("Model") and v235.Name == "ComputerTable" then
+                local v236 = v235:FindFirstChild("Screen")
+                if v236 and v236:IsA("BasePart") then
+                    local v237 = v236.BrickColor
+                    if v237 == BrickColor.new("Bright blue") or v237 == BrickColor.new("Bright red") then
+                        table.insert(v234, v235)
+                    end
+                end
+            end
+        end
+        if # v234 ~= 0 then
+            local v238 = v234[math.random(1, # v234)]
+            local v239 = v238:FindFirstChild("ComputerTrigger1")
+            if v239 then
+                local v240 = v229.HumanoidRootPart
+                if v240 and (v238 and v239) then
+                    v240.CFrame = v239.CFrame * CFrame.new(0, 3, 0)
+                end
+            end
+        else
+            return
+        end
+    else
+        return
+    end
+end
+v3:AddButton({
+    Name = "Teleport to computer",
+    Callback = function()
+        vu241()
+    end
+})
+local vu242 = game:GetService("Players")
+local vu243 = false
+local function vu251()
+    if vu243 then
+        return
+    else
+        vu243 = true
+        local v244 = vu242.LocalPlayer
+        local v245 = v244.Character
+        if v245 then
+            local v246 = v245:FindFirstChild("HumanoidRootPart")
+            if v246 then
+                local v247 = vu242:GetPlayers()
+                if # v247 > 1 then
+                    local v248 = v247[math.random(1, # v247)]
+                    if v248 ~= v244 then
+                        local v249 = v248.Character
+                        local v250 = v249 and v249:FindFirstChild("HumanoidRootPart")
+                        if v250 then
+                            v246.CFrame = v250.CFrame
+                        end
+                    end
+                end
+                vu243 = false
+            else
+                vu243 = false
+            end
+        else
+            vu243 = false
+            return
+        end
+    end
+end
+v3:AddButton({
+    Name = "Teleport to Random Player",
+    Callback = function()
+        vu251()
+    end
+})
+local v252 = game:GetService("Players").LocalPlayer
+local vu253 = v252.Character or v252.CharacterAdded:Wait()
+local v254 = vu253
+local vu255 = vu253.WaitForChild(v254, "Humanoid")
+v252.CharacterAdded:Connect(function(p256)
+    vu253 = p256
+    vu255 = p256:WaitForChild("Humanoid")
+end)
+v5:AddSlider({
+    Name = "Speed Boost",
+    Min = 16,
+    Max = 200,
+    Default = 16,
+    Color = Color3.fromRGB(255, 255, 255),
+    Increment = 1,
+    ValueName = "%",
+    Callback = function(p257)
+        if vu255 then
+            vu255.WalkSpeed = p257
+        end
+    end
+})
+v5:AddSlider({
+    Name = "Jump Boost",
+    Min = 36,
+    Max = 200,
+    Default = 36,
+    Color = Color3.fromRGB(255, 255, 255),
+    Increment = 1,
+    ValueName = "%",
+    Callback = function(p258)
+        if vu255 then
+            vu255.JumpPower = p258
+        end
+    end
+})
+v6:AddLabel("Scripter: Noktscript21")
+v6:AddLabel("Last Update: 12/07/2024")
+v1:Init()

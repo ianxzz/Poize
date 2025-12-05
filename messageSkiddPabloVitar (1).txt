@@ -2,40 +2,39 @@
 
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
-v1:MakeNotification({
-    Name = "Script Loaded!",
-    Content = "I already called FBI and sent your IP address to Roblox",
-    Image = "rbxassetid://4483345998",
-    Time = 5
+OrionLib:MakeNotification({
+	Name = "script loaded",
+	Content = "Enjoy",
+	Image = "rbxassetid://4483345998",
+	Time = 5
 })
-local v2 = v1:MakeWindow({
-    Name = "Nokt/Flee The Facility",
-    HidePremium = false,
-    SaveConfig = true,
-    IntroText = "Nokt",
-    ConfigFolder = "Orion"
+local Tab = Window:MakeTab({
+	Name = "Flee the facility-by nokt",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
 })
-local v3 = v2:MakeTab({
-    Name = "Main",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
+local Tab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
 })
-local v4 = v2:MakeTab({
-    Name = "Visuals",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
+local Tab = Window:MakeTab({
+	Name = "Visuals",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
 })
-local v5 = v2:MakeTab({
-    Name = "Misc",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
+local Tab = Window:MakeTab({
+	Name = "Mis",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
 })
-local v6 = v2:MakeTab({
-    Name = "Credits",
-    Icon = "rbxassetid://4483345998",
-    PremiumOnly = false
+local Tab = Window:MakeTab({
+	Name = "Credits",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
 })
-v3:AddParagraph("!!!!!!!!", "After script running, jump once.\nAfter use NoClip, jump once if you dont want your character walk like disabled person.")
+
+Tab:AddParagraph("!!!!!!!!", "After script running, jump once.\nAfter use NoClip, jump once if you dont want your character walk like disabled person.")
 local v7 = game:GetService("RunService")
 local vu8 = game:GetService("ReplicatedStorage")
 local vu9 = false
@@ -57,7 +56,7 @@ v3:AddToggle({
 local v12 = game.Players.LocalPlayer
 local vu13 = (v12.Character or v12.CharacterAdded:Wait()):WaitForChild("Humanoid")
 local vu14 = false
-v3:AddToggle({
+Tab:AddToggle({
     Name = "No Slow When Beast",
     Default = false,
     Callback = function(p15)
@@ -210,7 +209,7 @@ vu16.PlayerRemoving:Connect(function(p57)
         vu21[p57] = nil
     end
 end)
-v4:AddToggle({
+Tab:AddToggle({
     Name = "ESP",
     Default = false,
     Callback = function(p58)
@@ -218,7 +217,7 @@ v4:AddToggle({
         vu55()
     end
 })
-v4:AddDropdown({
+Tab:AddDropdown({
     Name = "Choose Style",
     Default = "Box",
     Options = {
@@ -353,7 +352,7 @@ local function v104(p91)
     end
 end
 if v4 then
-    v4:AddToggle({
+    Tab:AddToggle({
         Name = "Computer ESP",
         Default = false,
         Save = true,
@@ -436,7 +435,7 @@ local function v137(p124)
     end
 end
 if v4 then
-    v4:AddToggle({
+    Tab:AddToggle({
         Name = "Doors",
         Default = false,
         Save = true,
@@ -490,7 +489,7 @@ vu139.Heartbeat:Connect(function()
         vu148()
     end
 end)
-v5:AddToggle({
+Tab:AddToggle({
     Name = "No-clip",
     Default = false,
     Callback = function(p155)
@@ -509,7 +508,7 @@ v140.CharacterAdded:Connect(function(p156)
 end)
 local vu157 = false
 local vu158 = nil
-v5:AddToggle({
+Tab:AddToggle({
     Name = "Inf Jump",
     Default = false,
     Save = true,
@@ -604,7 +603,7 @@ v162.KeyUp:connect(function(p171)
         vu165.f = 0
     end
 end)
-v5:AddBind({
+Tab:AddBind({
     Name = "Fly",
     Default = v167,
     Hold = false,
@@ -712,7 +711,7 @@ local function vu213()
     end
 end
 local vu214 = false
-v4:AddToggle({
+Tab:AddToggle({
     Name = "Tracers",
     Default = false,
     Callback = function(p215)
@@ -752,7 +751,7 @@ local function vu225()
         v224.Density = vu221
     end
 end
-v3:AddToggle({
+Tab:AddToggle({
     Name = "Remove Darkness",
     Default = false,
     Callback = function(p226)
@@ -803,7 +802,7 @@ local function vu241()
         return
     end
 end
-v3:AddButton({
+Tab:AddButton({
     Name = "Teleport to computer",
     Callback = function()
         vu241()
@@ -842,7 +841,7 @@ local function vu251()
         end
     end
 end
-v3:AddButton({
+Tab:AddButton({
     Name = "Teleport to Random Player",
     Callback = function()
         vu251()
@@ -856,7 +855,7 @@ v252.CharacterAdded:Connect(function(p256)
     vu253 = p256
     vu255 = p256:WaitForChild("Humanoid")
 end)
-v5:AddSlider({
+Tab:AddSlider({
     Name = "Speed Boost",
     Min = 16,
     Max = 200,
@@ -870,7 +869,7 @@ v5:AddSlider({
         end
     end
 })
-v5:AddSlider({
+Tab:AddSlider({
     Name = "Jump Boost",
     Min = 36,
     Max = 200,
